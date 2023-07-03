@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package licenta.drona.companies;
+
+message Company {
+    string id = 1;
+    string name = 2;
+    string owner_name = 3;
+    repeated string product_ids = 4;
+}
+
+message CreateCompanyRequest {
+    string name = 1;
+    string owner_name = 2;
+}
+
+message CreateCompanyResponse {
+    Company result = 1;
+}
+
+message GetCompaniesRequest {
+    Company filter = 1;
+}
+
+message GetCompaniesResponse {
+    repeated Company results = 1;
+}
+
+message UpdateCompanyRequest {
+    Company new_company = 1;
+    string old_company_id = 2;
+}
+
+message UpdateCompanyResponse {
+    Company result = 1;
+}
+
+message DeleteCompanyRequest {
+    string id = 1;
+}
+
+message DeleteCompanyResponse {
+    Company result = 1;
+}
+
+service CompaniesService {
+    rpc CreateCompany(CreateCompanyRequest) returns (CreateCompanyResponse);
+    rpc GetCompanies(GetCompaniesRequest) returns (GetCompaniesResponse);
+    rpc UpdateCompany(UpdateCompanyRequest) returns (UpdateCompanyResponse);
+    rpc DeleteCompany(DeleteCompanyRequest) returns (DeleteCompanyResponse);
+}
